@@ -5,12 +5,12 @@ const dotenv = require('dotenv')
 const colors = require('colors')
 const chats = require('./data/data')
 const connectToDB = require('./config/db')
+const userRoutes = require('./routes/userRoutes')
 dotenv.config()
 connectToDB()
+app.use(express.json())
 app.use(cors())
-app.get('/api/chats', (req, res) => {
-  res.send(chats)
-})
+app.use('/api/user', userRoutes)
 const port = process.env.PORT || 5000
 app.listen(port, () => {
   console.log(`server is connected on port ${port}`.bgCyan.white)
